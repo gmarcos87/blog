@@ -3,6 +3,7 @@ layout: post
 title:  "Composición funcional en JavaScript"
 date:   2016-12-14 09:54:26 -0300
 categories: javascript patrones
+comments: true
 ---
 Vamos a tomar un ejemplo bastante simple, para comenzar a refactorearlo con el patrón de composición funcional. Aviso desde ya todo el código estará en ES6.
 
