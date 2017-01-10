@@ -4,19 +4,19 @@ title: "Curso rapido de Machine Learning: Parte 1"
 date: "2016-12-31 10:40:56 -0300"
 comments: true
 ---
-*Daniel Geng y Shannon Shih de la Universidad de Berkeley publicaron un crash course sobre Machine Learning bastante interesante y con una curva de aprendizaje muy bien manejada. Me tomo la libertad de traducir y publicar los articulos, sin buscar una presisión excesiva, simplemente que se enteienda tan bien en español como en ingles. Que los disfruten!*
+*Daniel Geng y Shannon Shih de la Universidad de Berkeley publicaron un crash course sobre Machine Learning bastante interesante y con una curva de aprendizaje muy bien manejada. Me tomo la libertad de traducir y publicar los artículos, sin buscar una precisión excesiva, simplemente que se entienda tan bien en español como en ingles. Que los disfruten!*
 
-## Introducción, Regreción/Clasificación, Cost Functions, y Método del Gradiente
+## Introducción, Regresión/Clasificación, Cost Functions, y Método del Gradiente
 
 
 Machine learning (ML) ha recibido mucha atención recientemente, y no sin una buena razón. Ya ha revolucionado distintos campos, desde el reconocimiento de imágenes hasta la salud y el transporte. Sin embargo, una explicación típica para el aprendizaje de máquina suena así:
 
 >"Se dice de un programa de computadora que aprende de la experiencia E con respecto a alguna clase de tareas T y la medida de desempeño P si su desempeño en tareas en T, medido por P, mejora con la experiencia E."
 
-No muy entendible, ¿verdad? Este post, el primero de una serie de tutoriales, tiene como objetivo hacer que Machine Learning sea accesible a cualquier persona dispuesta a aprender. Lo hemos diseñado para darle una sólida comprensión de cómo funcionan los algoritmos de ML, así como proporcionarle el conocimiento para aprovecharlo en sus proyectos.
+No muy simpático, ¿verdad? Este post, el primero de una serie de tutoriales, tiene como objetivo hacer que Machine Learning sea accesible a cualquier persona dispuesta a aprender. Lo hemos diseñado para darle una sólida comprensión de cómo funcionan los algoritmos de ML, así como proporcionarle el conocimiento para aprovecharlo en sus proyectos.
 
 ### Entonces... qué es Machine Learning?
-En su esencia ML no es un concepto difícil de comprender. De hecho, la gran mayoría de los algoritmos de ML se ocupan de una simple tarea: dibujar líneas, mas especificamente de dibujar líneas a través de datos. Qué significa eso? Veamos un ejemplo sencillo.
+En su esencia ML no es un concepto difícil de comprender. De hecho, la gran mayoría de los algoritmos de ML se ocupan de una simple tarea: dibujar líneas, mas específicamente de dibujar líneas a través de datos. Qué significa eso? Veamos un ejemplo sencillo.
 
 ### Clasificación
 
@@ -26,34 +26,34 @@ Digamos que usted es una computadora con una colección de imágenes de manzanas
 
 Las x rojas se denominan manzanas y las x naranjas se etiquetan como naranjas. Probablemente notará que hay un patrón en los datos. Las manzanas parecen reunirse en el lado izquierdo del gráfico porque son en su mayoría de color rojo, y las naranjas parecen congregarse en el lado derecho porque son en su mayoría de color naranja. Queremos que nuestro algoritmo aprenda estos tipos de patrones.
 
-Para este problema en particular, nuestro objetivo es crear un algoritmo que dibuje una línea entre los dos grupos etiquetados, llamado **límite de decisión** (decision boundary). El límite de decisión más simple para nuestros datos podría ser algo como esto:
+Para este problema en particular, nuestro objetivo es crear un algoritmo que dibuje una línea entre los dos grupos etiquetados, se la denomina **límite de decisión** (decision boundary). El límite de decisión más simple para nuestros datos podría ser algo como esto:
 
 ![Límite de decisión]({{ site.baseurl }}/assets/img//ml1/image_1.svg)
 
-Sólo una línea recta entre las manzanas y las naranjas. Sin embargo, los algoritmos de aprendizaje de máquina mucho más complicados pueden terminar dibujando límites de decisión mucho más complicados:
+Sólo una línea recta entre las manzanas y las naranjas. Sin embargo, los algoritmos mucho más complejos pueden terminar dibujando límites de decisión mucho más complicados:
 
 ![Límite de decisión]({{ site.baseurl }}/assets/img//ml1/image_2.svg)
 
-Nuestra suposición es que la línea que hemos dibujado para distinguir entre las imagenes de manzanas y naranjas de nuestros datos de entrenamiento será capaz de distinguir una manzana de una naranja en cualquier imagen. **En otras palabras, al dar a nuestro algoritmo ejemplos de manzanas y naranjas para aprender, puede generalizar su experiencia a las imágenes de manzanas y naranjas que nunca ha encontrado antes**. Por ejemplo, si nos dieron una imagen de un fruto, representado por la X azul, podríamos clasificarlo como una naranja basado en el límite de decisión que dibujamos:
+Nuestra suposición es que la línea que hemos dibujado, para distinguir entre las imágenes de manzanas y naranjas de nuestros datos de entrenamiento, será capaz de diferenciar una manzana de una naranja en cualquier imagen. **En otras palabras, al dar a nuestro algoritmo ejemplos de manzanas y naranjas para aprender, puede generalizar su experiencia a las imágenes de manzanas y naranjas que nunca ha encontrado antes**. Por ejemplo, si nos dieron una imagen de un fruto, representado por la X azul, podríamos clasificarlo como una naranja basado en el límite de decisión que dibujamos:
 
 ![Límite de decisión]({{ site.baseurl }}/assets/img//ml1/image_3.svg)
 
 Este es el poder del aprendizaje automático. Tomamos algunos datos de entrenamiento, ejecutamos un algoritmo (programa) de Machine Learning que dibuja un límite de decisión sobre los datos, y luego extrapolar lo que hemos aprendido a piezas completamente nuevas de datos.
 
-Por supuesto, distinguir entre manzanas y naranjas es una tarea bastante mundana. Sin embargo, podemos aplicar esta estrategia a problemas mucho más emocionantes, como clasificar los tumores como malignos o benignos, marcar los correos electrónicos como spam o no como spam, o analizar las huellas dactilares de los sistemas de seguridad. Este tipo de aprendizaje de *ML-líneas de dibujo* para separar los datos es sólo un subcampo, llamada clasificación. Otro subcampo, llamado regresión, trata de dibujar líneas que describen datos.
+Por supuesto, distinguir entre manzanas y naranjas es una tarea bastante mundana. Sin embargo, podemos aplicar esta estrategia a problemas mucho más emocionantes, como clasificar los tumores como malignos o benignos, marcar los correos electrónicos como spam o no como spam, o analizar las huellas dactilares de los sistemas de seguridad. Este tipo de aprendizaje de *ML-líneas de dibujo* para separar los datos es sólo un subcampo, llamado clasificación. Otro subcampo, llamado regresión, trata de dibujar líneas que describen datos.
 
-## Regreción
+## Regresión
 Digamos que tenemos algunos datos de entrenamiento etiquetados. En particular, digamos que tenemos el precio de varias casas en relación a su superficie. Si visualizamos la información como un gráfico se ve así:
 
 ![Costo <-> Superficie]({{ site.baseurl }}/assets/img//ml1/image_4.svg)
 
 Cada uno de las X representa una casa con determinado precio y metros cuadrados. Observe que aunque hay alguna variación en los datos (en otras palabras, cada punto de datos es un poco disperso, pero también que hay un patrón: a medida que las casas se hacen más grandes, también se vuelven más caras. Queremos que nuestro algoritmo encuentre y utilice este patrón para predecir los precios de la vivienda basados ​​en el tamaño de la casa.
 
-Simplemente mirando los datos de entrenamiento intuitivamente podemos ver que hay una franja diagonal en la gráfica en la que la mayoría de las casas parecen aterrizar. Podemos generalizar esta idea y decir que todas las casas tendrán una alta probabilidad de estar en el conjunto diagonal de puntos de datos. Por ejemplo, hay una probabilidad bastante alta de que una casa esté en la X verde en el gráfico de abajo y una probabilidad bastante baja de que una casa esté en la X roja en el gráfico de abajo.
+Simplemente mirando los datos de entrenamiento podemos ver que hay una franja diagonal en la gráfica en la que la mayoría de las casas parecen aterrizar. Podemos generalizar esta idea y decir que todas las casas tendrán una alta probabilidad de estar en el conjunto diagonal de puntos de datos. Por ejemplo, hay una probabilidad bastante alta de que una casa esté en la X verde en el gráfico de abajo y una probabilidad bastante baja de que una casa esté en la X roja en el gráfico de abajo.
 
 ![Posibilidades]({{ site.baseurl }}/assets/img//ml1/image_5.svg)
 
-Ahora podemos generalizar aún más y preguntar, para una determinada cantiad de metros cuadrados, ¿Cuánto vale la pena pagar por una casa? Por supuesto, sería muy difícil obtener una respuesta exacta. Sin embargo, una respuesta aproximada es mucho más fácil de conseguir. Para ello, trazamos una línea a través del conjunto de datos, lo más cerca posible de cada punto de datos. Esta línea, llamada un **predictor**, predice el precio de una casa segun su tamaño. Para cualquier punto en el predictor, existe una alta probabilidad de que una casa de esa superficie tenga ese precio. En cierto sentido, podemos decir que el predictor representa una "media" de los precios de la vivienda para un metraje dado.
+Ahora podemos generalizar aún más y preguntar, para una determinada cantidad de metros cuadrados, ¿Cuánto vale la pena pagar por una casa? Por supuesto, sería muy difícil obtener una respuesta exacta. Sin embargo, una respuesta aproximada es mucho más fácil de conseguir. Para ello, trazamos una línea a través del conjunto de datos, lo más cerca posible de cada punto de datos. Esta línea, llamada un **predictor**, predice el precio de una casa según su tamaño. Para cualquier punto en el predictor, existe una alta probabilidad de que una casa de esa superficie tenga ese precio. En cierto sentido, podemos decir que el predictor representa una "media" de los precios de la vivienda para un metraje dado.
 
 ![Predictor]({{ site.baseurl }}/assets/img//ml1/image_6.svg)
 
@@ -89,7 +89,7 @@ En este caso podemos ajustar un predictor a los datos. Pero en lugar de dibujar 
   </video>
 </center>
 
-Así que hemos visto ejemplos de una y dos variables de entrada, pero muchas aplicaciones de aprendizaje de máquinas toman en cuenta cientos e incluso miles de variables. Aunque los seres humanos lamentablemente somos incapaces de visualizar algo superior a tres dimensiones, los mismos principios que acabamos de aprender se aplicarán a esos sistemas.
+Así que hemos visto ejemplos de una y dos variables de entrada, pero muchas aplicaciones de ML toman en cuenta cientos e incluso miles de variables. Aunque los seres humanos lamentablemente somos incapaces de visualizar algo superior a tres dimensiones, los mismos principios que acabamos de aprender se aplicarán a esos sistemas.
 
 ## El predictor
 
@@ -144,7 +144,7 @@ Lo bueno del cuadrado del error es que todo es positivo. De esta manera podemos 
 Aquí, hemos resumido todos los errores al cuadrado, y dividido por N, que es el número de puntos de datos que tenemos, que es sólo la media de los errores al cuadrado. Por tanto, el error cuadrático medio.
 
 ## Método del Gradiente
-Cuando graficamos la función de coste (con sólo dos variables) se verá algo como esto:
+Cuando graficamos la función de costo (con sólo dos variables) se verá algo como esto:
 
 ![Método del Gradiente]({{ site.baseurl }}/assets/img//ml1/image_17.svg)
 
@@ -156,9 +156,9 @@ Para empezar, imagine rodar una pelota a lo largo del gráfico de la función de
 
 ## Entonces, ¿Qué acabo de aprender?
 
-Así que después de leer todo esto, esperemos Machine Learning esté empezando a tener más sentido para usted en este momento. Y espero que no parezca tan complicado como usted pensó una vez que era. Sólo recuerde que **Machine Learning es literalmente sólo líneas a través de datos de entrenamiento**. Decidimos que proposito tiene la linea, como un límite de decisión en un algoritmo de clasificación, o un predictor que modela el comportamiento del mundo real. Y estas líneas a su vez sólo vienen de encontrar el mínimo de una función de coste utilizando el descenso gradiente.
+Así que después de leer todo esto esperamos qye Machine Learning esté empezando a tener más sentido para usted. Y espero que no parezca tan complicado como pensó una vez que era. Sólo recuerde que **Machine Learning es literalmente sólo líneas a través de datos de entrenamiento**. Decidimos que propósito tiene la linea, como un límite de decisión en un algoritmo de clasificación, o un predictor que modela el comportamiento del mundo real. Y estas líneas a su vez sólo vienen de encontrar el mínimo de una función de coste utilizando el descenso gradiente.
 
 Dicho de otra manera, realmente ML es sólo el reconocimiento de patrones. Los algoritmos ML aprenden patrones dibujando líneas a través de datos de entrenamiento, y luego generalizan los patrones que ve a nuevos datos. Pero eso plantea la pregunta: ¿el aprendizaje automático realmente "aprende"? Bueno, ¿quién puede decir que el aprendizaje no es sólo reconocimiento de patrones?
 
-<pre><script src="{{ site.baseurl }}/assets/img//ml1/shapes.js"></script>
+<script src="{{ site.baseurl }}/assets/img//ml1/shapes.js"></script>
 <script> init(); </script>
