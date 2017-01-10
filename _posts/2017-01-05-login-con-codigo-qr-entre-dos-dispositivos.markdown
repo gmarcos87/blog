@@ -118,6 +118,7 @@ Listo, si ejecutamos `node app.js` deberíamos tener nuestro server corriendo en
 El servidor cuenta con dos rutas, / via get y /auth via post. La primera mostrará la pantalla de login con el código Qr y la segunda receptará los datos enviados por la aplicación del celular.
 
 Agregaremos ahora nuestro servidor de Sockets para conexión en tiempo real entre el server y el navegador. Al final del app.js escribimos:
+
 ```javascript
 //Socket manager
 io.on('connection', function (socket) {
@@ -131,11 +132,13 @@ io.on('connection', function (socket) {
 });
 ```
 Este es el bosquejo de los eventos que vamos a utilizar, cuando un navegador se conecta le emitimos un hash que lo va a identificar (en este caso es la palabra test). Para generar un identificador único vamos a incluir el modulo de node Crypto:
+
 ```javascript
 const crypto = require('crypto');
 ```
 
 Y segun este [post](http://stackoverflow.com/questions/9407892/how-to-generate-random-sha1-hash-to-use-as-id-in-node-js) la mejor forma de obtener un identificador random similar a SHA1 es:
+
 ```javascript
 let randomId = function(){
   return crypto.randomBytes(20).toString('hex');
@@ -176,18 +179,24 @@ Casi está lista nuestra parte de sockets en el servidor, solo queda agregar un 
 Dentro de nuestro método */auth* tienen que suceder un par de acciones. Por este método la aplicación mobile envía el token de su usuario registrado Firebase junto con el hash SHA1 escaneado del qr, comprobamos su veracidad y en caso de que esté todo correcto emitimos un token de logeo al navegador correspondiente.
 
 Antes que nada instalemos y configuremos [firebase-admin](https://firebase.google.com/docs/admin/setup)
+
 ```bash
 npm install firebase-admin --save
 ```
+
 Importamos el módulo en nuestro firebase-admin.js
+
 ```javascript
 const admin = require("firebase-admin");
 ```
+
 Necesitamos bajarnos de Firebase nuestra credencial, un JSON con datos privados que otorgan control total sobre nuestra DB, usuarios, archivos, etc en firebase, así que ojo con publicar este archivo en GitHub! En la [consola de Firebase](https://console.firebase.google.com/) ingresamos a nuestro proyecto o creamos uno y luego clickeamos en *Configuración de proyecto*.
+
 ![Firebase console]({{ site.baseurl }}/assets/qr-login/permisos.jpg)
 
 En este panel hay que ir a *Cuentas de servicio* y luego debajo clickear *Generar nueva clave privada*. Esto descargará un archivo JSON al que movemos a nuestro proyecto bajo el nombre de "serviceAccountKey.json".
 En firebase-admin.js importamos nuestra clave, inicializamos el admin y lo exportamos.
+
 ```javascript
 const admin = require("firebase-admin");
 const serviceAccount = require("./serviceAccountKey.json");
@@ -200,6 +209,7 @@ admin.initializeApp({
 module.exports = admin;
 ```
 La idea es tener toda la inisialización del admin en un solo archivo y luego importarlo cuando lo necesitemos ya listo para utilizar. En nuestro caso vamos a utilizarlo en app.js, así que debajo de todas las importaciones que ya tenemos agregamos:
+
 ```javascript
 const admin = require('./firebase-admin')
 
@@ -208,6 +218,7 @@ Nota que al tener './' en el nombre buscará en nuestros archivos y no en el mod
 
 ## **/auth** uniendo Firebase y Socket.io
 El código del método /auth quedará así:
+
 ```javascript
 app.post('/auth', function(req, res, next) {
   //Datos enviados por la aplicación mobile
@@ -264,6 +275,7 @@ Cuando el navegador logre hacer login a Firebase ya no necesitaremos mas la cone
 
 ## Pantalla de login
 La pantalla de login básicamente es la encargada de mostrar el qr con el hash asignado y de administrar los eventos del socket y firebase según corresponda. Hay que tener en claro que el javascript que escribamos de acá en adelante va a ser ejecutado en el cliente (navegador) y no está relacionado con el código que escribimos antes. La manipulación del DOM la voy a hacer con el viejo y querido jQuery, pero podrías usar lo que quieras. Abrimos */views/login-view.ejs* y comenzamos con el HTML:
+
 ```html
 <!DOCTYPE html>
 <html>
@@ -290,6 +302,7 @@ La pantalla de login básicamente es la encargada de mostrar el qr con el hash a
 </html>
 ```
 Los archivos estáticos que llamemos (como js/front-app.js o css/main.css) estarán dentro de la estructura de directorios de */public*. Antes de continuar añadimos un poco de estilo en main.css
+
 ```css
 body {
   padding: 0 auto;
