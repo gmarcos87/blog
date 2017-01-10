@@ -13,13 +13,13 @@
 
 
 var lineImg = document.createElement('img');
-  lineImg.src = "/assets/img//ml1/pink-dot.png";
+  lineImg.src = "/assets/ml1/pink-dot.png";
 
   var dataImg = document.createElement('img');
-  dataImg.src = "/assets/img//ml1/blue-dot.png";
+  dataImg.src = "/assets/ml1/blue-dot.png";
 
 var background = document.createElement('img');
-background.src = "/assets/img//ml1/coordinates.svg";
+background.src = "/assets/ml1/coordinates.svg";
 
 
 var radius = 10;
