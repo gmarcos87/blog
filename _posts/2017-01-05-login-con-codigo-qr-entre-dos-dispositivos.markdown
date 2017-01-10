@@ -51,7 +51,7 @@ npm install mocha chai chai-http webpack
 
 Luego de un rato podemos comenzar a crear nuestros archivos y directorios:
 
-```
+```bash
   qr-server
   │    app.js
   │    serviceAccountKey.json
@@ -75,6 +75,7 @@ Luego de un rato podemos comenzar a crear nuestros archivos y directorios:
 
 ### app.js
 Este es el punto de entrada de nuestra aplicación, cargamos las dependencias y el buildplate mínimo de express:
+
 ```javascript
 const express = require('express')
 const app = express();
