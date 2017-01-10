@@ -52,27 +52,27 @@ npm install mocha chai chai-http webpack
 Luego de un rato podemos comenzar a crear nuestros archivos y directorios:
 
 ```
-qr-server
-│    app.js
-│    serviceAccountKey.json
-|    firebase-admin.js
-|    package.json (Creado por npm)
-|
-└───/node_modules (Creado por npm)
-|
-└─── /public
-│   |    index.js
-|   |
-|   └───/css
-|   |    style.css
-|   |
-|   └─── /js
-|         app.js
-|
-└─── /views
-       login.ejs
-
+  qr-server
+  │    app.js
+  │    serviceAccountKey.json
+  |    firebase-admin.js
+  |    package.json (Creado por npm)
+  |
+  └───/node_modules (Creado por npm)
+  |
+  └─── /public
+  │   |    index.js
+  |   |
+  |   └───/css
+  |   |    style.css
+  |   |
+  |   └─── /js
+  |         app.js
+  |
+  └─── /views
+         login.ejs
 ```
+
 ### app.js
 Este es el punto de entrada de nuestra aplicación, cargamos las dependencias y el buildplate mínimo de express:
 ```javascript
