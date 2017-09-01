@@ -7,7 +7,7 @@ gems:                [jekyll-paginate]
 title:               Pixxel
 tagline:             'Marcos Gutierrez'
 description:         'Web developer de Córdoba, Argentina. Codeando desde el medio de las sierras siempre que interent ayude'
-url:                 https://gmarcos87.github.io/pixxel
+url:                 https://gmarcos87.github.io/blog/
 baseurl:             ""
 paginate:            5
 
@@ -18,4 +18,4 @@ author:
   email:             gmarco87@gmail.com
 
 # Custom vars
-version:             1.0.0
+version:             1.0.1
